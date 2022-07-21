@@ -28,6 +28,11 @@ namespace TorchGodTweaks
 		[DefaultValue(true)]
 		public bool ConvertTorchesUponHardmode;
 
+		[Label("Prevent Torch God Spawn")]
+		[Tooltip("Toggle if Torch God should never spawn (its regular condition is 'more than 100 torches nearby while underground')")]
+		[DefaultValue(true)]
+		public bool PreventTorchGodSpawn;
+
 		public static bool IsPlayerLocalServerOwner(int whoAmI)
 		{
 			if (Main.netMode == NetmodeID.MultiplayerClient)

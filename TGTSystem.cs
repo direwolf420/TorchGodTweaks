@@ -41,6 +41,7 @@ namespace TorchGodTweaks
 			PlaceStyleToBiomeTorchItem = new Dictionary<int, int>();
 			foreach (var type in BiomeTorchItems)
 			{
+				//ContentSamples only populated with vanilla items here, but that's fine
 				int style = ContentSamples.ItemsByType[type].placeStyle;
 				BiomeTorchItemToPlaceStyle.Add(type, style);
 				PlaceStyleToBiomeTorchItem.Add(style, type);

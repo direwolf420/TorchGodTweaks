@@ -1,3 +1,4 @@
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,7 +22,7 @@ namespace TorchGodTweaks
 			int torchAmount = 100;
 			int otherAmount = 25;
 
-			var recipe = Mod.CreateRecipe(ItemID.TorchGodsFavor);
+			var recipe = Recipe.Create(ItemID.TorchGodsFavor);
 
 			recipe.AddRecipeGroup(TorchGodTweaks.GoldRecipeGroup, 4);
 			recipe.AddIngredient(ItemID.Torch, torchAmount);
