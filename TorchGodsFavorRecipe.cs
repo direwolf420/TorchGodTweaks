@@ -24,13 +24,13 @@ namespace TorchGodTweaks
 
 			var recipe = Recipe.Create(ItemID.TorchGodsFavor);
 
-			recipe.AddRecipeGroup(TorchGodTweaks.GoldRecipeGroup, 4);
+			recipe.AddRecipeGroup(TGTSystem.GoldRecipeGroup, 4);
 			recipe.AddIngredient(ItemID.Torch, torchAmount);
 			foreach (var biomeTorch in goodTorches)
 			{
 				recipe.AddIngredient(biomeTorch, otherAmount);
 			}
-			recipe.AddRecipeGroup(TorchGodTweaks.PreHMEvilTorchRecipeGroup, otherAmount);
+			recipe.AddRecipeGroup(TGTSystem.PreHMEvilTorchRecipeGroup, otherAmount);
 
 			recipe.AddTile(TileID.DemonAltar);
 			recipe.Register();

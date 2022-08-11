@@ -45,7 +45,7 @@ namespace TorchGodTweaks
 
 			if (torchGodCooldownInfo != null)
 			{
-				//Prevent torch god from ever appearing by not letting its timer reach 0
+				//Prevent torch god from ever appearing naturally by not letting its timer reach 0
 				var value = (int)torchGodCooldownInfo.GetValue(Player);
 				if (value < CooldownThreshold)
 				{

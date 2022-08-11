@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -18,6 +20,11 @@ namespace TorchGodTweaks
 		/// place style of the tile to item
 		/// </summary>
 		public static Dictionary<int, int> PlaceStyleToBiomeTorchItem;
+
+		public static int PreHMEvilTorchRecipeGroup { get; private set; }
+
+		public static int GoldRecipeGroup { get; private set; }
+
 
 		public const int FrameY = 22;
 
@@ -68,11 +75,35 @@ namespace TorchGodTweaks
 			//TODO modded
 		}
 
+		public override void AddRecipeGroups()
+		{
+			if (!Config.Instance.TorchGodsFavorRecipe)
+			{
+				return;
+			}
+
+			string any = Language.GetTextValue("LegacyMisc.37") + " ";
+			PreHMEvilTorchRecipeGroup = RecipeGroup.RegisterGroup("TGT:EvilTorch", new RecipeGroup(() => any + "Evil Torch", new int[]
+			{
+				ItemID.CorruptTorch,
+				ItemID.CrimsonTorch,
+			}));
+
+			GoldRecipeGroup = RecipeGroup.RegisterGroup("TGT:GoldBar", new RecipeGroup(() => any + Lang.GetItemNameValue(ItemID.GoldBar), new int[]
+			{
+				ItemID.GoldBar,
+				ItemID.PlatinumBar,
+			}));
+		}
+
 		public override void Unload()
 		{
 			BiomeTorchItems = null;
 			BiomeTorchItemToPlaceStyle = null;
 			PlaceStyleToBiomeTorchItem = null;
+
+			PreHMEvilTorchRecipeGroup = 0;
+			GoldRecipeGroup = 0;
 		}
 
 		public override void ModifyHardmodeTasks(List<GenPass> list)
