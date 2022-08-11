@@ -13,6 +13,7 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 
 **Reverse Torch Swap:**
 * Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
+    * This does not include Coral, Cursed, and Ichor torches
 
 **Convert Torches Upon Hardmode:**
 * Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered

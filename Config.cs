@@ -23,6 +23,18 @@ namespace TorchGodTweaks
 		[DefaultValue(true)]
 		public bool ReverseTorchSwap;
 
+		[Label("[i:433]: Reverse Torch Swap For Demon Torch")]
+		[Tooltip("Toggle if Reverse Torch Swap should also apply to Demon Torches")]
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool ReverseTorchSwapForDemonTorch;
+
+		[Label("[i:3004]: Reverse Torch Swap For Bone Torch")]
+		[Tooltip("Toggle if Reverse Torch Swap should also apply to Bone Torches")]
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool ReverseTorchSwapForBoneTorch;
+
 		[Label("[i:8]->[i:4385]: Convert Torches Upon Hardmode")]
 		[Tooltip("Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered")]
 		[DefaultValue(true)]

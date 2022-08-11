@@ -1,1 +1,1 @@
-Added config toggle to prevent Torch God from spawning
+Added config toggles for Demon/Bone Torch inclusion for Reverse Torch Swap

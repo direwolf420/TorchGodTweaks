@@ -23,7 +23,7 @@ namespace TorchGodTweaks
 
 		public override void OnModLoad()
 		{
-			BiomeTorchItems = new HashSet<int>()
+			var torchItems = new HashSet<int>()
 			{
 				ItemID.IceTorch,
 				ItemID.DesertTorch,
@@ -31,11 +31,26 @@ namespace TorchGodTweaks
 				ItemID.HallowedTorch,
 				ItemID.CorruptTorch,
 				ItemID.CrimsonTorch,
+
 				//ItemID.CursedTorch,
 				//ItemID.IchorTorch,
 				//ItemID.CoralTorch,
-				//No bone torch
 			};
+
+			var config = Config.Instance;
+			if (config.ReverseTorchSwapForDemonTorch)
+			{
+				//Added opt-in because it's placed by TGF, but is not contributing to luck
+				torchItems.Add(ItemID.DemonTorch);
+			}
+
+			if (config.ReverseTorchSwapForBoneTorch)
+			{
+				//Added opt-in because it's placed by TGF, but applies in many places (my own decision)
+				torchItems.Add(ItemID.BoneTorch);
+			}
+
+			BiomeTorchItems = torchItems;
 
 			BiomeTorchItemToPlaceStyle = new Dictionary<int, int>();
 			PlaceStyleToBiomeTorchItem = new Dictionary<int, int>();
