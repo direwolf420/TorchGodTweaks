@@ -1,4 +1,4 @@
 displayName = Torch God Tweaks
 author = direwolf420
-version = 1.0.5
+version = 1.0.5.1
 buildIgnore = *.csproj, *.user, *.md, obj\*, bin\*, .vs\*, .gitignore, .gitattributes
