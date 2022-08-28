@@ -1,1 +1,1 @@
-Added config toggles for Demon/Bone Torch inclusion for Reverse Torch Swap
+Added config toggle for converting torches when Clentaminator is used

@@ -45,6 +45,11 @@ namespace TorchGodTweaks
 		[DefaultValue(true)]
 		public bool PreventTorchGodSpawn;
 
+		[Label("[i:780] Convert Torches When Clentaminating")]
+		[Tooltip("Toggle if any placed, convertible torch (any evil or regular torch) will get converted when Clentaminator is used\nThis will only convert to/from regular torches, not bone torches")]
+		[DefaultValue(true)]
+		public bool ConvertTorchesWhenClentaminating;
+
 		public static bool IsPlayerLocalServerOwner(int whoAmI)
 		{
 			if (Main.netMode == NetmodeID.MultiplayerClient)

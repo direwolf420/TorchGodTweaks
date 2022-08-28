@@ -21,4 +21,8 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 **Prevent Torch God Spawn:**
 * Toggle if Torch God should never spawn (its regular condition is 'more than 100 torches nearby')
 
+**Convert Torches When Clentaminating:**
+* Toggle if any placed, convertible torch (any evil or regular torch) will get converted when Clentaminator is used
+* This will only convert to/from regular torches, not bone torches
+
 Check the config for more details (__all options are enabled by default__).
