@@ -25,7 +25,9 @@ namespace TorchGodTweaks
 
 		public static int GoldRecipeGroup { get; private set; }
 
-
+		/// <summary>
+		/// The TileFrameY offset for the vanilla torch tile for each style
+		/// </summary>
 		public const int FrameY = 22;
 
 		public override void OnModLoad()
