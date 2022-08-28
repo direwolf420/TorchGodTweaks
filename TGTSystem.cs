@@ -34,6 +34,7 @@ namespace TorchGodTweaks
 		{
 			var torchItems = new HashSet<int>()
 			{
+				ItemID.Torch,
 				ItemID.IceTorch,
 				ItemID.DesertTorch,
 				ItemID.JungleTorch,
