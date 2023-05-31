@@ -47,6 +47,11 @@ Mods: {
 						This will only convert to/from regular torches, not bone torches
 						'''
 				}
+
+				AffectCampfires: {
+					Label: "[i:Campfire] Affect Campfires"
+					Tooltip: Toggle if campfires should also be affected by this mod
+				}
 			}
 
 			Common.AcceptClientChanges: Only the host of this world can change the config! Do so in singleplayer.

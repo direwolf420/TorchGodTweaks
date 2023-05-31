@@ -3,6 +3,7 @@ using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.IO;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -11,6 +12,9 @@ namespace TorchGodTweaks
 	/*
 	public class TestItem : ModItem
 	{
+		public override LocalizedText DisplayName => Language.GetText("ItemName.IronPickaxe");
+		public override LocalizedText Tooltip => LocalizedText.Empty;
+
 		public override string Texture => "Terraria/Images/Item_1";
 
 		public override void SetDefaults()
@@ -36,8 +40,7 @@ namespace TorchGodTweaks
 
 			return true;
 		}
-	}
-	*/
+	}*/
 
 	public class TorchConversionGenPass : GenPass
 	{
@@ -80,7 +83,7 @@ namespace TorchGodTweaks
 				for (int i = startX; i <= endX; i++)
 				{
 					Tile tile = Framing.GetTileSafely(i, j);
-					if (!tile.HasTile || tile.TileType != TileID.Torches)
+					if (!tile.HasTile)
 					{
 						//TODO only vanilla support atm
 						continue;
@@ -96,7 +99,12 @@ namespace TorchGodTweaks
 					//Performance critical
 					const int scannedAreaSquareLength = 9; //Has to be uneven for best results
 
-					if (ConvertTorchBasedOnSurroundings(i, j, scannedAreaSquareLength))
+					if (tile.TileType == TileID.Torches && ConvertTorchBasedOnSurroundings(i, j, scannedAreaSquareLength))
+					{
+						convertedCount++;
+					}
+
+					if (tile.TileType == TileID.Campfire && Config.Instance.AffectCampfires && ConvertCampfireBasedOnSurroundings(i, j, scannedAreaSquareLength))
 					{
 						convertedCount++;
 					}
@@ -114,20 +122,70 @@ namespace TorchGodTweaks
 			return wall >= specialType && wall < specialType + 4;
 		}
 
-		private static void Convert(int x, int y, int newPlaceStyle)
+		private static void ConvertTorch(int x, int y, int newPlaceStyle)
 		{
-			Main.tile[x, y].TileFrameY = (short)(newPlaceStyle * TGTSystem.FrameY);
+			Main.tile[x, y].TileFrameY = (short)(newPlaceStyle * TGTSystem.TorchFrameY);
 			//WorldGen.SquareTileFrame(x, y);
+		}
+
+		public static void ConvertCampfire(int x, int y, int newPlaceStyle)
+		{
+			Tile tile = Main.tile[x, y];
+			int xOffset = tile.TileFrameX / 18 % 3;
+			int yOffset = tile.TileFrameY / 18 % 2;
+			int left = x - xOffset;
+			int top = y - yOffset;
+
+			for (int l = left; l < left + 3; l++)
+			{
+				for (int m = top; m < top + 2; m++)
+				{
+					tile = Framing.GetTileSafely(l, m);
+					xOffset = tile.TileFrameX / 18 % 3;
+					if (tile.HasTile && tile.TileType == TileID.Campfire)
+					{
+						tile.TileFrameX = (short)(xOffset * 18 + newPlaceStyle * TGTSystem.CampfireFrameX);
+					}
+				}
+			}
 		}
 
 		private static bool ConvertTorchBasedOnSurroundings(int x, int y, int size)
 		{
-			//Tile torch = Framing.GetTileSafely(x, y);
-
 			int hallowStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
 			int crimsonStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
 			int corruptStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
 
+			int newPlaceStyle = GetNewPlaceStyle(x, y, size, hallowStyle, crimsonStyle, corruptStyle);
+
+			if (newPlaceStyle != -1)
+			{
+				ConvertTorch(x, y, newPlaceStyle);
+				return true;
+			}
+
+			return false;
+		}
+
+		private static bool ConvertCampfireBasedOnSurroundings(int x, int y, int size)
+		{
+			int hallowStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.HallowedCampfire];
+			int crimsonStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.CrimsonCampfire];
+			int corruptStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.CorruptCampfire];
+
+			int newPlaceStyle = GetNewPlaceStyle(x, y, size, hallowStyle, crimsonStyle, corruptStyle);
+
+			if (newPlaceStyle != -1)
+			{
+				ConvertCampfire(x, y, newPlaceStyle);
+				return true;
+			}
+
+			return false;
+		}
+
+		private static int GetNewPlaceStyle(int x, int y, int size, int hallowStyle, int crimsonStyle, int corruptStyle)
+		{
 			int hallowCount = 0;
 			int corruptCount = 0;
 			int crimsonCount = 0;
@@ -223,13 +281,7 @@ namespace TorchGodTweaks
 				}
 			}
 
-			if (newPlaceStyle != -1)
-			{
-				Convert(x, y, newPlaceStyle);
-				return true;
-			}
-
-			return false;
+			return newPlaceStyle;
 		}
 
 		private static bool IsWallHallow(ushort wall)

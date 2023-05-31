@@ -28,6 +28,23 @@ namespace TorchGodTweaks
 			return TGTSystem.VanillaBiomeTorchItemToPlaceStyle.Where(pair => convertibleTorchItems.Contains(pair.Key)).Select(pair => pair.Value).ToHashSet();
 		});
 
+		public static Lazy<HashSet<int>> ConvertibleCampfirePlaceStyles { get; private set; } = new Lazy<HashSet<int>>(() =>
+		{
+			//Only campfires for which solutions exist
+			var convertibleCampfireItems = new HashSet<int>()
+			{
+				ItemID.Campfire,
+				ItemID.HallowedCampfire,
+				ItemID.CorruptCampfire,
+				ItemID.CrimsonCampfire,
+				ItemID.FrozenCampfire,
+				ItemID.DesertCampfire,
+				ItemID.MushroomCampfire,
+			};
+
+			return TGTSystem.VanillaBiomeCampfireItemToPlaceStyle.Where(pair => convertibleCampfireItems.Contains(pair.Key)).Select(pair => pair.Value).ToHashSet();
+		});
+
 		public override void Load()
 		{
 			//Purification powder does not use this, so need to manually convert in its AI
@@ -38,15 +55,43 @@ namespace TorchGodTweaks
 		public override void Unload()
 		{
 			ConvertibleTorchPlaceStyles = null;
+			ConvertibleCampfirePlaceStyles = null;
 		}
 
-		public static void Convert(int x, int y, int newPlaceStyle)
+		public static void ConvertTorch(int x, int y, int newPlaceStyle)
 		{
-			Main.tile[x, y].TileFrameY = (short)(newPlaceStyle * TGTSystem.FrameY);
+			Main.tile[x, y].TileFrameY = (short)(newPlaceStyle * TGTSystem.TorchFrameY);
 			WorldGen.SquareTileFrame(x, y);
 			if (Main.netMode == NetmodeID.MultiplayerClient)
 			{
 				NetMessage.SendTileSquare(-1, x, y);
+			}
+		}
+
+		public static void ConvertCampfire(int x, int y, int newPlaceStyle)
+		{
+			Tile tile = Main.tile[x, y];
+			int xOffset = tile.TileFrameX / 18 % 3;
+			int yOffset = tile.TileFrameY / 18 % 2;
+			int left = x - xOffset;
+			int top = y - yOffset;
+			
+			for (int l = left; l < left + 3; l++)
+			{
+				for (int m = top; m < top + 2; m++)
+				{
+					tile = Framing.GetTileSafely(l, m);
+					xOffset = tile.TileFrameX / 18 % 3;
+					if (tile.HasTile && tile.TileType == TileID.Campfire)
+					{
+						tile.TileFrameX = (short)(xOffset * 18 + newPlaceStyle * TGTSystem.CampfireFrameX);
+					}
+				}
+			}
+
+			if (Main.netMode == NetmodeID.MultiplayerClient)
+			{
+				NetMessage.SendTileSquare(-1, left + 1, top, 3);
 			}
 		}
 
@@ -69,59 +114,108 @@ namespace TorchGodTweaks
 					}
 
 					Tile tile = Main.tile[x, y];
-					if (!tile.HasTile || tile.TileType != TileID.Torches)
+					if (!tile.HasTile)
 					{
 						continue;
 					}
 
-					int placeStyle = tile.TileFrameY / TGTSystem.FrameY;
-					int intendedStyle = -1;
-
-					/*
-					/// Denotes the biome that you wish to convert to. The following biomes are supported:
-					/// 0 => The Purity.
-					/// 1 => The Corruption.
-					/// 2 => The Hallow.
-					/// 3 => Mushroom biome.
-					/// 4 => The Crimson.
-					*/
-					switch (conversionType)
+					if (tile.TileType == TileID.Torches)
 					{
-						case BiomeConversionID.Purity:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
-							break;
-						case BiomeConversionID.Corruption:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
-							break;
-						case BiomeConversionID.Hallow:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
-							break;
-						case BiomeConversionID.GlowingMushroom:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.MushroomTorch];
-							break;
-						case BiomeConversionID.Crimson:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
-							break;
-						case BiomeConversionID.Sand:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.DesertTorch];
-							break;
-						case BiomeConversionID.Snow:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.IceTorch];
-							break;
-						case BiomeConversionID.Dirt:
-							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
-							break;
-						default:
-							break;
+						ConvertBiomeTorches(conversionType, y, x, tile);
 					}
 
-					if (intendedStyle > -1)
+					if (Config.Instance.AffectCampfires && tile.TileType == TileID.Campfire)
 					{
-						if (ConvertibleTorchPlaceStyles.Value.Contains(placeStyle) && placeStyle != intendedStyle)
-						{
-							Convert(x, y, intendedStyle);
-						}
+						ConvertBiomeCampfires(conversionType, y, x, tile);
 					}
+				}
+			}
+		}
+
+		private static void ConvertBiomeTorches(int conversionType, int y, int x, Tile tile)
+		{
+			int placeStyle = tile.TileFrameY / TGTSystem.TorchFrameY;
+			int intendedStyle = -1;
+
+			switch (conversionType)
+			{
+				case BiomeConversionID.Purity:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
+					break;
+				case BiomeConversionID.Corruption:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
+					break;
+				case BiomeConversionID.Hallow:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
+					break;
+				case BiomeConversionID.GlowingMushroom:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.MushroomTorch];
+					break;
+				case BiomeConversionID.Crimson:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
+					break;
+				case BiomeConversionID.Sand:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.DesertTorch];
+					break;
+				case BiomeConversionID.Snow:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.IceTorch];
+					break;
+				case BiomeConversionID.Dirt:
+					intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
+					break;
+				default:
+					break;
+			}
+
+			if (intendedStyle > -1)
+			{
+				if (ConvertibleTorchPlaceStyles.Value.Contains(placeStyle) && placeStyle != intendedStyle)
+				{
+					ConvertTorch(x, y, intendedStyle);
+				}
+			}
+		}
+
+		private static void ConvertBiomeCampfires(int conversionType, int y, int x, Tile tile)
+		{
+			int placeStyle = tile.TileFrameX / TGTSystem.CampfireFrameX;
+			int intendedStyle = -1;
+
+			switch (conversionType)
+			{
+				case BiomeConversionID.Purity:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.Campfire];
+					break;
+				case BiomeConversionID.Corruption:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.CorruptCampfire];
+					break;
+				case BiomeConversionID.Hallow:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.HallowedCampfire];
+					break;
+				case BiomeConversionID.GlowingMushroom:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.MushroomCampfire];
+					break;
+				case BiomeConversionID.Crimson:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.CrimsonCampfire];
+					break;
+				case BiomeConversionID.Sand:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.DesertCampfire];
+					break;
+				case BiomeConversionID.Snow:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.FrozenCampfire];
+					break;
+				case BiomeConversionID.Dirt:
+					intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.Campfire];
+					break;
+				default:
+					break;
+			}
+
+			if (intendedStyle > -1)
+			{
+				if (ConvertibleCampfirePlaceStyles.Value.Contains(placeStyle) && placeStyle != intendedStyle)
+				{
+					ConvertCampfire(x, y, intendedStyle);
 				}
 			}
 		}
@@ -164,21 +258,47 @@ namespace TorchGodTweaks
 					}
 
 					Tile tile = Main.tile[x, y];
-					if (!tile.HasTile || tile.TileType != TileID.Torches)
+					if (!tile.HasTile)
 					{
 						continue;
 					}
 
-					int placeStyle = tile.TileFrameY / TGTSystem.FrameY;
-
-					int intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
-					int corruptionStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
-					int crimsonStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
-					if ((placeStyle == corruptionStyle || placeStyle == crimsonStyle) && placeStyle != intendedStyle)
+					if (tile.TileType == TileID.Torches)
 					{
-						TGTClentaminatorSystem.Convert(x, y, intendedStyle);
+						ConvertEvilTorches(y, x, tile);
+					}
+
+					if (Config.Instance.AffectCampfires && tile.TileType == TileID.Campfire)
+					{
+						ConvertEvilCampfires(y, x, tile);
 					}
 				}
+			}
+		}
+
+		private static void ConvertEvilTorches(int y, int x, Tile tile)
+		{
+			int placeStyle = tile.TileFrameY / TGTSystem.TorchFrameY;
+
+			int intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
+			int corruptionStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
+			int crimsonStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
+			if ((placeStyle == corruptionStyle || placeStyle == crimsonStyle) && placeStyle != intendedStyle)
+			{
+				TGTClentaminatorSystem.ConvertTorch(x, y, intendedStyle);
+			}
+		}
+
+		private static void ConvertEvilCampfires(int y, int x, Tile tile)
+		{
+			int placeStyle = tile.TileFrameX / TGTSystem.CampfireFrameX;
+
+			int intendedStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.Campfire];
+			int corruptionStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.CorruptCampfire];
+			int crimsonStyle = TGTSystem.VanillaBiomeCampfireItemToPlaceStyle[ItemID.CrimsonCampfire];
+			if ((placeStyle == corruptionStyle || placeStyle == crimsonStyle) && placeStyle != intendedStyle)
+			{
+				TGTClentaminatorSystem.ConvertCampfire(x, y, intendedStyle);
 			}
 		}
 	}

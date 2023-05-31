@@ -22,6 +22,9 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 * Toggle if any placed, convertible torch (that has a matching Solution) will get converted when Clentaminator is used
 * This will only convert to/from regular torches, not bone torches
 
+[b]Affect Campfires:[/b]
+* Toggle if campfires should also be affected by this mod
+
 Check the config for more details ([u]all options are enabled by default[/u]).
 [hr][/hr]
 [b]Localization:[/b]

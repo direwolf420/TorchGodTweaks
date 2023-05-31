@@ -22,6 +22,9 @@ Convert Torches When Clentaminating:
 * Toggle if any placed, convertible torch (that has a matching Solution) will get converted when Clentaminator is used
 * This will only convert to/from regular torches, not bone torches
 
+Affect Campfires:
+* Toggle if campfires should also be affected by this mod
+
 Check the config for more details (all options are enabled by default).
 
 Localization:

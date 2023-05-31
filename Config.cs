@@ -40,6 +40,10 @@ namespace TorchGodTweaks
 		[DefaultValue(true)]
 		public bool ConvertTorchesWhenClentaminating;
 
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool AffectCampfires;
+
 		public static bool IsPlayerLocalServerOwner(int whoAmI)
 		{
 			if (Main.netMode == NetmodeID.MultiplayerClient)

@@ -7,15 +7,16 @@ using Terraria.WorldBuilding;
 
 namespace TorchGodTweaks
 {
-	//TODO campfire support?
 	//TODO convert regular torches (if no other biome present) into bone torch
 	public class TGTSystem : ModSystem
 	{
 		public static HashSet<int> VanillaBiomeTorchItems;
+		public static HashSet<int> VanillaBiomeCampfireItems;
 		public static HashSet<int> ModdedBiomeTorchItems;
+		public static HashSet<int> ModdedBiomeCampfireItems;
 
 		/// <summary>
-		/// Item to place style of the tile. Multiply by <see cref="FrameY"/> to get the proper frameY
+		/// Item to place style of the tile. Multiply by <see cref="TorchFrameY"/> to get the proper frameY
 		/// </summary>
 		public static Dictionary<int, int> VanillaBiomeTorchItemToPlaceStyle;
 
@@ -24,8 +25,17 @@ namespace TorchGodTweaks
 		/// </summary>
 		public static Dictionary<int, int> VanillaPlaceStyleToBiomeTorchItem;
 
-		public static int PreHMEvilTorchRecipeGroup { get; private set; }
+		/// <summary>
+		/// Item to place style of the tile. Multiply by <see cref="CampfireFrameX"/> to get the proper frameX
+		/// </summary>
+		public static Dictionary<int, int> VanillaBiomeCampfireItemToPlaceStyle;
 
+		/// <summary>
+		/// place style of the tile to item
+		/// </summary>
+		public static Dictionary<int, int> VanillaPlaceStyleToBiomeCampfireItem;
+
+		public static int PreHMEvilTorchRecipeGroup { get; private set; }
 		public static int GoldRecipeGroup { get; private set; }
 
 		public static LocalizedText AcceptClientChangesText { get; private set; }
@@ -36,7 +46,12 @@ namespace TorchGodTweaks
 		/// <summary>
 		/// The TileFrameY offset for the vanilla torch tile for each style
 		/// </summary>
-		public const int FrameY = 22;
+		public const int TorchFrameY = 22;
+
+		/// <summary>
+		/// The TileFrameX offset for the vanilla campfire tile for each style
+		/// </summary>
+		public const int CampfireFrameX = 18 * 3;
 
 		public override void OnModLoad()
 		{
@@ -59,26 +74,61 @@ namespace TorchGodTweaks
 				//ItemID.BoneTorch,
 			};
 
+			var vanillaCampfireItems = new HashSet<int>()
+			{
+				ItemID.Campfire,
+				ItemID.FrozenCampfire,
+				ItemID.DesertCampfire,
+				ItemID.JungleCampfire,
+				ItemID.HallowedCampfire,
+				ItemID.CorruptCampfire,
+				ItemID.CrimsonCampfire,
+				ItemID.MushroomCampfire,
+
+				//ItemID.CursedCampfire,
+				//ItemID.IchorCampfire,
+				//ItemID.CoralCampfire,
+				//ItemID.DemonCampfire,
+				//ItemID.ShimmerCampfire,
+				//ItemID.BoneCampfire,
+			};
+
 			var config = Config.Instance;
 			if (config.ReverseTorchSwapForDemonTorch)
 			{
 				//Added opt-in because it's placed by TGF, but is not contributing to luck
 				vanillaTorchItems.Add(ItemID.DemonTorch);
+
+				if (config.AffectCampfires)
+				{
+					vanillaCampfireItems.Add(ItemID.DemonCampfire);
+				}
 			}
 
 			if (config.ReverseTorchSwapForAetherTorch)
 			{
 				//Added opt-in because it's placed by TGF, but is not contributing to luck
 				vanillaTorchItems.Add(ItemID.ShimmerTorch);
+
+				if (config.AffectCampfires)
+				{
+					vanillaCampfireItems.Add(ItemID.ShimmerCampfire);
+				}
 			}
 
 			if (config.ReverseTorchSwapForBoneTorch)
 			{
 				//Added opt-in because it's placed by TGF, but applies in many places (my own decision)
 				vanillaTorchItems.Add(ItemID.BoneTorch);
+
+				if (config.AffectCampfires)
+				{
+					vanillaCampfireItems.Add(ItemID.BoneCampfire);
+				}
 			}
 
 			VanillaBiomeTorchItems = vanillaTorchItems;
+			VanillaBiomeCampfireItems = vanillaCampfireItems;
 
 			VanillaBiomeTorchItemToPlaceStyle = new Dictionary<int, int>();
 			VanillaPlaceStyleToBiomeTorchItem = new Dictionary<int, int>();
@@ -90,14 +140,30 @@ namespace TorchGodTweaks
 				VanillaPlaceStyleToBiomeTorchItem.Add(style, type);
 			}
 
+			VanillaBiomeCampfireItemToPlaceStyle = new Dictionary<int, int>();
+			VanillaPlaceStyleToBiomeCampfireItem = new Dictionary<int, int>();
+			foreach (var type in VanillaBiomeCampfireItems)
+			{
+				int style = ContentSamples.ItemsByType[type].placeStyle;
+				VanillaBiomeCampfireItemToPlaceStyle.Add(type, style);
+				VanillaPlaceStyleToBiomeCampfireItem.Add(style, type);
+			}
+
 			ModdedBiomeTorchItems = new HashSet<int>();
+			ModdedBiomeCampfireItems = new HashSet<int>();
 
 			foreach (var modBiome in ModContent.GetContent<ModBiome>())
 			{
-				int item = modBiome.BiomeTorchItemType;
-				if (item > 0 /*&& ItemID.Sets.Torches[item]*/) //Crashes here, but in PostSetupContent then it crashes in AppliesToEntity
+				int torch = modBiome.BiomeTorchItemType;
+				if (torch > 0 /*&& ItemID.Sets.Torches[torch]*/) //Crashes here, but in PostSetupContent then it crashes in AppliesToEntity
 				{
-					ModdedBiomeTorchItems.Add(item);
+					ModdedBiomeTorchItems.Add(torch);
+				}
+
+				int campfire = modBiome.BiomeCampfireItemType;
+				if (campfire > 0)
+				{
+					ModdedBiomeCampfireItems.Add(campfire);
 				}
 			}
 
@@ -132,8 +198,14 @@ namespace TorchGodTweaks
 		public override void Unload()
 		{
 			VanillaBiomeTorchItems = null;
+			ModdedBiomeTorchItems = null;
 			VanillaBiomeTorchItemToPlaceStyle = null;
 			VanillaPlaceStyleToBiomeTorchItem = null;
+
+			VanillaBiomeCampfireItems = null;
+			ModdedBiomeCampfireItems = null;
+			VanillaBiomeCampfireItemToPlaceStyle = null;
+			VanillaPlaceStyleToBiomeCampfireItem = null;
 
 			PreHMEvilTorchRecipeGroup = 0;
 			GoldRecipeGroup = 0;
