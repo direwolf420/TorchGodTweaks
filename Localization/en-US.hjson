@@ -50,7 +50,7 @@ Mods: {
 
 				AffectCampfires: {
 					Label: "[i:Campfire] Affect Campfires"
-					Tooltip: Toggle if campfires should also be affected by this mod
+					Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitely refers to campfires
 				}
 			}
 
