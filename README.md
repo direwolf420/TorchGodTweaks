@@ -29,7 +29,7 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 * This will only convert to/from regular torches, not bone torches
 
 **Affect Campfires:**
-* Toggle if campfires should also be affected by this mod
+* Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitely refers to campfires
 
 Check the config for more details (__all options are enabled by default__).
 
