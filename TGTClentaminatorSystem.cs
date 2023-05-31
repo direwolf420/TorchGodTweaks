@@ -8,26 +8,31 @@ using Terraria.ModLoader;
 
 namespace TorchGodTweaks
 {
+	//Only works with vanilla!!
 	public class TGTClentaminatorSystem : ModSystem
 	{
 		public static Lazy<HashSet<int>> ConvertibleTorchPlaceStyles { get; private set; } = new Lazy<HashSet<int>>(() =>
 		{
+			//Only torches for which solutions exist
 			var convertibleTorchItems = new HashSet<int>()
 			{
 				ItemID.Torch,
 				ItemID.HallowedTorch,
 				ItemID.CorruptTorch,
 				ItemID.CrimsonTorch,
+				ItemID.IceTorch,
+				ItemID.DesertTorch,
+				ItemID.MushroomTorch,
 			};
 
-			return TGTSystem.BiomeTorchItemToPlaceStyle.Where(pair => convertibleTorchItems.Contains(pair.Key)).Select(pair => pair.Value).ToHashSet();
+			return TGTSystem.VanillaBiomeTorchItemToPlaceStyle.Where(pair => convertibleTorchItems.Contains(pair.Key)).Select(pair => pair.Value).ToHashSet();
 		});
 
 		public override void Load()
 		{
 			//Purification powder does not use this, so need to manually convert in its AI
-			//Works for clentaminator and holy water
-			On.Terraria.WorldGen.Convert += WorldGen_Convert;
+			//Works for clentaminator and thrown waters
+			On_WorldGen.Convert += WorldGen_Convert;
 		}
 
 		public override void Unload()
@@ -45,7 +50,7 @@ namespace TorchGodTweaks
 			}
 		}
 
-		private void WorldGen_Convert(On.Terraria.WorldGen.orig_Convert orig, int i, int j, int conversionType, int size)
+		private void WorldGen_Convert(On_WorldGen.orig_Convert orig, int i, int j, int conversionType, int size)
 		{
 			orig(i, j, conversionType, size);
 
@@ -82,19 +87,29 @@ namespace TorchGodTweaks
 					*/
 					switch (conversionType)
 					{
-						case 0:
-							intendedStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.Torch];
+						case BiomeConversionID.Purity:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
 							break;
-						case 1:
-							intendedStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
+						case BiomeConversionID.Corruption:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
 							break;
-						case 2:
-							intendedStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
+						case BiomeConversionID.Hallow:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
 							break;
-						case 3:
+						case BiomeConversionID.GlowingMushroom:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.MushroomTorch];
 							break;
-						case 4:
-							intendedStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
+						case BiomeConversionID.Crimson:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
+							break;
+						case BiomeConversionID.Sand:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.DesertTorch];
+							break;
+						case BiomeConversionID.Snow:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.IceTorch];
+							break;
+						case BiomeConversionID.Dirt:
+							intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
 							break;
 						default:
 							break;
@@ -155,14 +170,11 @@ namespace TorchGodTweaks
 					}
 
 					int placeStyle = tile.TileFrameY / TGTSystem.FrameY;
-					if (placeStyle == TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.HallowedTorch])
-					{
-						//Purification powder can't convert anything hallow
-						continue;
-					}
 
-					int intendedStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.Torch];
-					if (TGTClentaminatorSystem.ConvertibleTorchPlaceStyles.Value.Contains(placeStyle) && placeStyle != intendedStyle)
+					int intendedStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.Torch];
+					int corruptionStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
+					int crimsonStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
+					if ((placeStyle == corruptionStyle || placeStyle == crimsonStyle) && placeStyle != intendedStyle)
 					{
 						TGTClentaminatorSystem.Convert(x, y, intendedStyle);
 					}

@@ -10,9 +10,8 @@ namespace TorchGodTweaks
 
 		public override bool AppliesToEntity(Item entity, bool lateInstantiation)
 		{
-			//If a vanilla biome torch, and if not a default torch
-			//TODO figure out how to make modded torches work with this on custom biomes
-			return lateInstantiation && entity.type != ItemID.Torch && TGTSystem.BiomeTorchItems.Contains(entity.type) /*&& ItemID.Sets.Torches[entity.type]*/;
+			//If a vanilla or modded biome torch, and if not a default torch
+			return lateInstantiation && entity.type != ItemID.Torch && (TGTSystem.VanillaBiomeTorchItems.Contains(entity.type) || TGTSystem.ModdedBiomeTorchItems.Contains(entity.type));
 		}
 
 		public override bool ItemSpace(Item item, Player player)

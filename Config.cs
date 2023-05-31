@@ -12,41 +12,31 @@ namespace TorchGodTweaks
 
 		public static Config Instance => ModContent.GetInstance<Config>();
 
-		[Label("[i:5043]: Torch God's Favor Recipe")]
-		[Tooltip("Toggle if Torch God's Favor will be craftable (recipe in the mod description)")]
-		[DefaultValue(true)]
 		[ReloadRequired]
+		[DefaultValue(true)]
 		public bool TorchGodsFavorRecipe;
 
-		[Label("[i:8]: Reverse Torch Swap")]
-		[Tooltip("Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)")]
 		[DefaultValue(true)]
 		public bool ReverseTorchSwap;
 
-		[Label("[i:433]: Reverse Torch Swap For Demon Torch")]
-		[Tooltip("Toggle if Reverse Torch Swap should also apply to Demon Torches")]
 		[ReloadRequired]
 		[DefaultValue(true)]
 		public bool ReverseTorchSwapForDemonTorch;
 
-		[Label("[i:3004]: Reverse Torch Swap For Bone Torch")]
-		[Tooltip("Toggle if Reverse Torch Swap should also apply to Bone Torches")]
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool ReverseTorchSwapForAetherTorch;
+
 		[ReloadRequired]
 		[DefaultValue(true)]
 		public bool ReverseTorchSwapForBoneTorch;
 
-		[Label("[i:8]->[i:4385]: Convert Torches Upon Hardmode")]
-		[Tooltip("Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered")]
 		[DefaultValue(true)]
 		public bool ConvertTorchesUponHardmode;
 
-		[Label("Prevent Torch God Spawn")]
-		[Tooltip("Toggle if Torch God should never spawn (its regular condition is 'more than 100 torches nearby while underground')")]
 		[DefaultValue(true)]
 		public bool PreventTorchGodSpawn;
 
-		[Label("[i:780] Convert Torches When Clentaminating")]
-		[Tooltip("Toggle if any placed, convertible torch (any evil or regular torch) will get converted when Clentaminator is used\nThis will only convert to/from regular torches, not bone torches")]
 		[DefaultValue(true)]
 		public bool ConvertTorchesWhenClentaminating;
 
@@ -73,7 +63,7 @@ namespace TorchGodTweaks
 			if (Main.netMode == NetmodeID.SinglePlayer) return true;
 			else if (!IsPlayerLocalServerOwner(whoAmI))
 			{
-				message = "You are not the server owner so you can not change this config";
+				message = TGTSystem.AcceptClientChangesText.ToString();
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);

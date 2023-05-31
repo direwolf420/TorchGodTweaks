@@ -10,15 +10,21 @@ Torch God's Favor Recipe:
 Reverse Torch Swap:
 * Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
     * This does not include Coral, Cursed, and Ichor torches
+    * Separate toggles for Demon, Aether, and Bone torches as they don't contribute to luck
 
 Convert Torches Upon Hardmode:
 * Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
 
 Prevent Torch God Spawn:
-* Toggle if Torch God should never spawn (its regular condition is 'more than 100 torches nearby while underground')
+* Toggle if Torch God should never spawn (its regular condition is 'in caverns & more than 100 torches nearby')
 
 Convert Torches When Clentaminating:
-* Toggle if any placed, convertible torch (any evil or regular torch) will get converted when Clentaminator is used
+* Toggle if any placed, convertible torch (that has a matching Solution) will get converted when Clentaminator is used
 * This will only convert to/from regular torches, not bone torches
 
 Check the config for more details (all options are enabled by default).
+
+Localization:
+If you want to add support for different languages, you are welcome to contribute localizations here: https://github.com/direwolf420/TorchGodTweaks
+List of localization contributors:
+* None!

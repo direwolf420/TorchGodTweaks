@@ -124,9 +124,9 @@ namespace TorchGodTweaks
 		{
 			//Tile torch = Framing.GetTileSafely(x, y);
 
-			int hallowStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
-			int crimsonStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
-			int corruptStyle = TGTSystem.BiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
+			int hallowStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.HallowedTorch];
+			int crimsonStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CrimsonTorch];
+			int corruptStyle = TGTSystem.VanillaBiomeTorchItemToPlaceStyle[ItemID.CorruptTorch];
 
 			int hallowCount = 0;
 			int corruptCount = 0;
