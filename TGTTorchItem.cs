@@ -12,8 +12,8 @@ namespace TorchGodTweaks
 		{
 			//If a vanilla or modded biome torch or campfire, and if not a default torch or campfire
 			return lateInstantiation && (
-				entity.type != ItemID.Torch && (TGTSystem.VanillaBiomeTorchItems.Contains(entity.type) || TGTSystem.ModdedBiomeTorchItems.Contains(entity.type))
-				|| Config.Instance.AffectCampfires && entity.type != ItemID.Campfire && (TGTSystem.VanillaBiomeCampfireItems.Contains(entity.type) || TGTSystem.ModdedBiomeCampfireItems.Contains(entity.type))
+				entity.type != ItemID.Torch && (TGTSystem.VanillaBiomeTorchItems.Contains(entity.type) || TGTSystem.IsModdedBiomeTorch(entity))
+				|| Config.Instance.AffectCampfires && entity.type != ItemID.Campfire && (TGTSystem.VanillaBiomeCampfireItems.Contains(entity.type) || TGTSystem.IsModdedBiomeCampfire(entity))
 				);
 		}
 

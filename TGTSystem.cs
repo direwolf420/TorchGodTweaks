@@ -12,8 +12,8 @@ namespace TorchGodTweaks
 	{
 		public static HashSet<int> VanillaBiomeTorchItems;
 		public static HashSet<int> VanillaBiomeCampfireItems;
-		public static HashSet<int> ModdedBiomeTorchItems;
-		public static HashSet<int> ModdedBiomeCampfireItems;
+		public static HashSet<int> ModdedBiomeTorchItems; //Cache for ModBiome properties
+		public static HashSet<int> ModdedBiomeCampfireItems; //Cache for ModBiome properties
 
 		/// <summary>
 		/// Item to place style of the tile. Multiply by <see cref="TorchFrameY"/> to get the proper frameY
@@ -219,6 +219,16 @@ namespace TorchGodTweaks
 			}
 
 			list.Add(new TorchConversionGenPass());
+		}
+
+		public static bool IsModdedBiomeTorch(Item item)
+		{
+			return ItemID.Sets.Torches[item.type] && ModdedBiomeTorchItems.Contains(item.type);
+		}
+
+		public static bool IsModdedBiomeCampfire(Item item)
+		{
+			return item.createTile > -1 && TileID.Sets.Campfire[item.createTile] && ModdedBiomeCampfireItems.Contains(item.type);
 		}
 	}
 }
