@@ -12,8 +12,8 @@ namespace TorchGodTweaks
 	{
 		public static HashSet<int> VanillaBiomeTorchItems;
 		public static HashSet<int> VanillaBiomeCampfireItems;
-		public static HashSet<int> ModdedBiomeTorchItems; //Cache for ModBiome properties
-		public static HashSet<int> ModdedBiomeCampfireItems; //Cache for ModBiome properties
+		private static HashSet<int> ModdedBiomeTorchItems; //Cache for ModBiome properties
+		private static HashSet<int> ModdedBiomeCampfireItems; //Cache for ModBiome properties
 
 		/// <summary>
 		/// Item to place style of the tile. Multiply by <see cref="TorchFrameY"/> to get the proper frameY
