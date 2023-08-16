@@ -34,7 +34,7 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 Check the config for more details (__all options are enabled by default__).
 
 ## Localization
-If you wish to contribute translations, visit the [tML wiki page](https://github.com/tModLoader/tModLoader/wiki/Localization) on that.
+If you wish to contribute translations, visit the [tML wiki page](https://github.com/tModLoader/tModLoader/wiki/Contributing-Localization) on that.
 This mod uses `.hjson` files in the `Localization` folder.
 Translate things that are in english and commented out (either via `//` or `/* */`, remove the comment markers after translating)
 

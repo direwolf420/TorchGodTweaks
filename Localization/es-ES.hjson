@@ -1,0 +1,65 @@
+Mods: {
+	TorchGodTweaks: {
+		Configs: {
+			Config: {
+				// DisplayName: Config
+
+				TorchGodsFavorRecipe: {
+					// Label: "[i:TorchGodsFavor] Torch God's Favor Recipe"
+					// Tooltip: Toggle if Torch God's Favor will be craftable (recipe in the mod description)
+				}
+
+				ReverseTorchSwap: {
+					// Label: "[i:Torch] Reverse Torch Swap"
+					// Tooltip: Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
+				}
+
+				ReverseTorchSwapForDemonTorch: {
+					// Label: "[i:DemonTorch] Reverse Torch Swap For Demon Torch"
+					// Tooltip: Toggle if Reverse Torch Swap should also apply to Demon Torches
+				}
+
+				ReverseTorchSwapForAetherTorch: {
+					// Label: "[i:ShimmerTorch] Reverse Torch Swap For Aether Torch"
+					// Tooltip: Toggle if Reverse Torch Swap should also apply to Aether Torches
+				}
+
+				ReverseTorchSwapForBoneTorch: {
+					// Label: "[i:BoneTorch] Reverse Torch Swap For Bone Torch"
+					// Tooltip: Toggle if Reverse Torch Swap should also apply to Bone Torches
+				}
+
+				ConvertTorchesUponHardmode: {
+					// Label: "[i:Torch]->[i:CorruptTorch] Convert Torches Upon Hardmode"
+					// Tooltip: Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
+				}
+
+				PreventTorchGodSpawn: {
+					// Label: "[i:TorchGodsFavor] Prevent Torch God Spawn"
+					// Tooltip: Toggle if Torch God should never spawn (its regular condition is 'in caverns & more than 100 torches nearby')
+				}
+
+				ConvertTorchesWhenClentaminating: {
+					// Label: "[i:GreenSolution] Convert Torches When Clentaminating"
+					/* Tooltip:
+						'''
+						Toggle if any placed, convertible torch (that has a matching Solution) will get converted when {$ItemName.Clentaminator} is used
+						This will only convert to/from regular torches, not bone torches
+						''' */
+				}
+
+				AffectCampfires: {
+					// Label: "[i:Campfire] Affect Campfires"
+					// Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitely refers to campfires
+				}
+			}
+
+			// Common.AcceptClientChanges: Only the host of this world can change the config! Do so in singleplayer.
+		}
+
+		RecipeGroups: {
+			// AnyEvilTorchRecipeGroup: "{0} Evil Torch"
+			// AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
+		}
+	}
+}
