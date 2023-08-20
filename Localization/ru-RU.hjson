@@ -2,64 +2,64 @@ Mods: {
 	TorchGodTweaks: {
 		Configs: {
 			Config: {
-				// DisplayName: Config
+				DisplayName: Настройки
 
 				TorchGodsFavorRecipe: {
-					// Label: "[i:TorchGodsFavor] Torch God's Favor Recipe"
-					// Tooltip: Toggle if Torch God's Favor will be craftable (recipe in the mod description)
+					Label: "[i:TorchGodsFavor] Рецепт Милости Бога факелов"
+					Tooltip: Дать возможность создавать Милость Бога факелов вручную (рецепт в описании модификации)
 				}
 
 				ReverseTorchSwap: {
-					// Label: "[i:Torch] Reverse Torch Swap"
-					// Tooltip: Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
+					Label: "[i:Torch] Обратная смена факелов"
+					Tooltip: Преобразовывать биомные факелы в обычные факелы при подборе (только если 'Замена факела в биоме' включена)
 				}
 
 				ReverseTorchSwapForDemonTorch: {
-					// Label: "[i:DemonTorch] Reverse Torch Swap For Demon Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Demon Torches
+					Label: "[i:DemonTorch] Обратная смена факелов для Демонических факелов"
+					Tooltip: Обратная смена факелов будет действовать и на Демонические факелы
 				}
 
 				ReverseTorchSwapForAetherTorch: {
-					// Label: "[i:ShimmerTorch] Reverse Torch Swap For Aether Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Aether Torches
+					Label: "[i:ShimmerTorch] Обратная смена факелов для Эфирных факелов"
+					Tooltip: Обратная смена факелов будет действовать и на Эфирные факелы
 				}
 
 				ReverseTorchSwapForBoneTorch: {
-					// Label: "[i:BoneTorch] Reverse Torch Swap For Bone Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Bone Torches
+					Label: "[i:BoneTorch] Обратная смена факелов для Костяных факелов"
+					Tooltip: Обратная смена факелов будет действовать и на Костяные факелы
 				}
 
 				ConvertTorchesUponHardmode: {
-					// Label: "[i:Torch]->[i:CorruptTorch] Convert Torches Upon Hardmode"
-					// Tooltip: Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
+					Label: "[i:Torch]->[i:CorruptTorch] Преобразовывать факелы при входе в Хардмод"
+					Tooltip: Факелы рядом с злыми блоками преобразуются в соответствующие злые факелы при первом входе в Хардмод
 				}
 
 				PreventTorchGodSpawn: {
-					// Label: "[i:TorchGodsFavor] Prevent Torch God Spawn"
-					// Tooltip: Toggle if Torch God should never spawn (its regular condition is 'in caverns & more than 100 torches nearby')
+					Label: "[i:TorchGodsFavor] Предотвратить появление Бога факелов"
+					Tooltip: Отключить появление Бога факелов при любых условиях (стандартные условия: глубина пещер, 100+ факелов рядом)
 				}
 
 				ConvertTorchesWhenClentaminating: {
-					// Label: "[i:GreenSolution] Convert Torches When Clentaminating"
-					/* Tooltip:
+					Label: "[i:GreenSolution] Преобразовывать факелы при очищении"
+					Tooltip:
 						'''
-						Toggle if any placed, convertible torch (that has a matching Solution) will get converted when {$ItemName.Clentaminator} is used
-						This will only convert to/from regular torches, not bone torches
-						''' */
+						При использовании Очистителя любой факел, который может меняться, преобразуется в факел, соответствующий использованному раствору
+						Работает только для преобразования из/в обычные факелы. Не работает с костяными факелами
+						'''
 				}
 
 				AffectCampfires: {
-					// Label: "[i:Campfire] Affect Campfires"
-					// Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitely refers to campfires
+					Label: "[i:Campfire] Влияние на костры"
+					Tooltip: Костры тоже будут попадать под влияние данной модификации. Всё, что относится к факелам, будет действовать и на костры
 				}
 			}
 
-			// Common.AcceptClientChanges: Only the host of this world can change the config! Do so in singleplayer.
+			Common.AcceptClientChanges: Только владелец этого мира может менять настройки! Смените настройки в одиночной игре.
 		}
 
 		RecipeGroups: {
-			// AnyEvilTorchRecipeGroup: "{0} Evil Torch"
-			// AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
+			AnyEvilTorchRecipeGroup: "{0} Злой факел"
+			AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
 		}
 	}
 }
