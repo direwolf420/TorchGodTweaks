@@ -1,6 +1,1 @@
-* Updated to 1.4.4 tml
-* Now supports modded biome torches for "Reverse Torch Swap"
-* Now supports ice, desert, and mushroom torches for "Convert Torches When Clentaminating"
-* Added config for Aether Torch
-* Now supports campfires. Everything that refers to torches implicitely refers to campfires. Config option
-* Now localizable. Read the mod description for more info
+* Added russian localization, thanks GodHybrid!

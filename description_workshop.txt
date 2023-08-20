@@ -30,4 +30,4 @@ Check the config for more details ([u]all options are enabled by default[/u]).
 [b]Localization:[/b]
 If you want to add support for different languages, you are welcome to contribute localizations here: [b][url=https://github.com/direwolf420/TorchGodTweaks]GitHub[/url][/b]
 List of localization contributors:
-* None!
+* Russian: [b]GodHybrid[/b]
