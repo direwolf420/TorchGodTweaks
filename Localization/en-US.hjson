@@ -44,7 +44,7 @@ Mods: {
 					Tooltip:
 						'''
 						Toggle if any placed, convertible torch (that has a matching Solution) will get converted when {$ItemName.Clentaminator} is used
-						This will only convert to/from regular torches, not bone torches
+						This will only convert to/from regular torches, not Bone torches
 						'''
 				}
 

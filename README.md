@@ -16,7 +16,7 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 **Reverse Torch Swap:**
 * Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
     * This does not include Coral, Cursed, and Ichor torches
-    * Separate toggles for Demon, Aether, and Bone torches as they don't contribute to luck
+    * Separate toggles for Demon, Aether, and Bone torches as they either don't contribute to luck or have no dedicated biome
 
 **Convert Torches Upon Hardmode:**
 * Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
@@ -26,7 +26,7 @@ Torch God Tweaks provides a way to skip the event entirely, and some QoL feature
 
 **Convert Torches When Clentaminating:**
 * Toggle if any placed, convertible torch (that has a matching Solution) will get converted when Clentaminator is used
-* This will only convert to/from regular torches, not bone torches
+* This will only convert to/from regular torches, not Bone torches
 
 **Affect Campfires:**
 * Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitely refers to campfires
