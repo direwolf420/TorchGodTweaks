@@ -2,64 +2,64 @@ Mods: {
 	TorchGodTweaks: {
 		Configs: {
 			Config: {
-				// DisplayName: Config
+				DisplayName: Configurazione
 
 				TorchGodsFavorRecipe: {
-					// Label: "[i:TorchGodsFavor] Torch God's Favor Recipe"
-					// Tooltip: Toggle if Torch God's Favor will be craftable (recipe in the mod description)
+					Label: "[i:TorchGodsFavor] Ricetta favore del dio della torcia"
+					Tooltip: Attiva/disattiva se il favore del dio della torcia dovrebbe essere craftabile (Ricetta nella descrizione della mod)
 				}
 
 				ReverseTorchSwap: {
-					// Label: "[i:Torch] Reverse Torch Swap"
-					// Tooltip: Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
+					Label: "[i:Torch] Scambio torcie inverso"
+					Tooltip: Attiva/disattiva se le torcie del bioma dovrebbero diventare torcie normali quando prese (solo se 'Scambio torcia bioma' è abilitato)
 				}
 
 				ReverseTorchSwapForDemonTorch: {
-					// Label: "[i:DemonTorch] Reverse Torch Swap For Demon Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Demon Torches
+					Label: "[i:DemonTorch] Scambio torcie inverso per Torcia demoniaca"
+					Tooltip: Attiva/disattiva se scambio torcie inverso dovrebbe applicarsi anche alle torcie demoniache
 				}
 
 				ReverseTorchSwapForAetherTorch: {
-					// Label: "[i:ShimmerTorch] Reverse Torch Swap For Aether Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Aether Torches
+					Label: "[i:ShimmerTorch] Scambio torcie inverso per Torcia dell'etere"
+					Tooltip: Attiva/disattiva se scambio torcie inverso dovrebbe applicarsi anche alle torcie dell'etere
 				}
 
 				ReverseTorchSwapForBoneTorch: {
-					// Label: "[i:BoneTorch] Reverse Torch Swap For Bone Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Bone Torches
+					Label: "[i:BoneTorch] Scambio torcie inverso per Torcia di ossa"
+					Tooltip: Attiva/disattiva se scambio torcie inverso dovrebbe applicarsi anche alle torcie di ossa
 				}
 
 				ConvertTorchesUponHardmode: {
-					// Label: "[i:Torch]->[i:CorruptTorch] Convert Torches Upon Hardmode"
-					// Tooltip: Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
+					Label: "[i:Torch]->[i:CorruptTorch] Converti torcie in modalità difficile"
+					Tooltip: Attiva/disattiva Attiva/disattiva se una torcia vicina a blocchi corrotti verrà convertita nella torcia corrotta corrispondente quando si entra in modalità difficile.
 				}
 
 				PreventTorchGodSpawn: {
-					// Label: "[i:TorchGodsFavor] Prevent Torch God Spawn"
-					// Tooltip: Toggle if Torch God should never spawn (its regular condition is 'in caverns & more than 100 torches nearby')
+					Label: "[i:TorchGodsFavor] Previeni spawn del Dio della torcia"
+					Tooltip: Attiva/disattiva se il Dio della torcia dovrebbe generarsi (a condizione che ci siano almen 100 torcie piazzate in una caverna)
 				}
 
 				ConvertTorchesWhenClentaminating: {
-					// Label: "[i:GreenSolution] Convert Torches When Clentaminating"
-					/* Tooltip:
+					Label: "[i:GreenSolution] Converti torcie durante la puricontaminazione"
+					Tooltip:
 						'''
-						Toggle if any placed, convertible torch (that has a matching Solution) will get converted when {$ItemName.Clentaminator} is used
-						This will only convert to/from regular torches, not Bone torches
-						''' */
+						Attiva/disattiva se piazzate, converte torcie (che hanno soluzioni apposite) che saranno convertite quando {$ItemName.Clentaminator} viene usato
+						Questa funzione converte solo le torce normali, non le torce di ossa.
+						''' 
 				}
 
 				AffectCampfires: {
-					// Label: "[i:Campfire] Affect Campfires"
-					// Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitly refers to campfires
+					Label: "[i:Campfire] Influisci sul Fuoco di bivacco"
+					Tooltip: Attiva/disattiva se i fuochi di bivacco dovrebbero essere influiti dalla mod. Tutto ciò che influisce le torce, influenzerà i fuochi di bivacco.
 				}
 			}
 
-			// Common.AcceptClientChanges: Only the host of this world can change the config! Do so in singleplayer.
+			Common.AcceptClientChanges: Solo il proprietario del mondo può cambiare la configurazione! Fallo in giocatore singolo.
 		}
 
 		RecipeGroups: {
-			// AnyEvilTorchRecipeGroup: "{0} Evil Torch"
-			// AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
+			AnyEvilTorchRecipeGroup: "{0} Torcia malvagia"
+			AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
 		}
 	}
 }
