@@ -2,7 +2,7 @@ Mods: {
 	TorchGodTweaks: {
 		Configs: {
 			Config: {
-				DisplayName: 设置
+				DisplayName: 模组配置
 
 				TorchGodsFavorRecipe: {
 					Label: "[i:TorchGodsFavor] 火把神的恩宠合成配方"
