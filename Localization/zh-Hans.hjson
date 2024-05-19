@@ -45,7 +45,7 @@ Mods: {
 						'''
 						在使用{$ItemName.Clentaminator}的同时转化可转化的（有对应环境溶液的）火把
 						只会转化为/自普通火把，骨头火把不受影响
-						''' 
+						'''
 				}
 
 				AffectCampfires: {
@@ -53,8 +53,6 @@ Mods: {
 					Tooltip: 篝火是否也会受影响，所有针对火把的功能将同时应用到篝火上
 				}
 			}
-
-			Common.AcceptClientChanges: 仅服务器主机可更改配置！请在单人模式中操作
 		}
 
 		RecipeGroups: {

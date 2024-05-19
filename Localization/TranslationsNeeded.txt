@@ -4,6 +4,6 @@ it-IT, 21/21, 100%, missing 0
 fr-FR, 0/21, 0%, missing 21
 es-ES, 0/21, 0%, missing 21
 ru-RU, 21/21, 100%, missing 0
-zh-Hans, 0/21, 0%, missing 21
+zh-Hans, 21/21, 100%, missing 0
 pt-BR, 0/21, 0%, missing 21
 pl-PL, 0/21, 0%, missing 21

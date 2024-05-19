@@ -2,3 +2,4 @@ v{ModVersion} has been published to {tMLBuildPurpose} tML v{tMLVersion}.
 
 * Disabled shimmer decrafting for the Torch God's Favor recipe
 * Added italian localization, thanks Sea Noodle!
+* Added simplified chinese localization, thanks Fox Radish, limeade_sn, and Cyrilly!

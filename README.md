@@ -41,3 +41,4 @@ Translate things that are in english and commented out (either via `//` or `/* *
 List of localization contributors:
 * Russian: **GodHybrid**
 * Italian: **Sea Noodle**
+* Simplified Chinese: **Fox Radish, limeade_sn, Cyrilly**
