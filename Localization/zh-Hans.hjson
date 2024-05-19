@@ -2,64 +2,65 @@ Mods: {
 	TorchGodTweaks: {
 		Configs: {
 			Config: {
-				// DisplayName: Config
+				DisplayName: 模组配置
 
 				TorchGodsFavorRecipe: {
-					// Label: "[i:TorchGodsFavor] Torch God's Favor Recipe"
-					// Tooltip: Toggle if Torch God's Favor will be craftable (recipe in the mod description)
+					Label: "[i:TorchGodsFavor] 火把神的恩宠合成配方"
+					Tooltip: 切换火把神的恩宠的合成配方开关（mod描述中的配方）
 				}
 
 				ReverseTorchSwap: {
-					// Label: "[i:Torch] Reverse Torch Swap"
-					// Tooltip: Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
+					Label: "[i:Torch] 反向火把替换"
+					Tooltip: 切换是否将拾起的生物群系火把转化为普通火把（当启用“生物群系火把交换”时）
 				}
 
 				ReverseTorchSwapForDemonTorch: {
-					// Label: "[i:DemonTorch] Reverse Torch Swap For Demon Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Demon Torches
+					Label: "[i:DemonTorch] 恶魔火把反向替换"
+					Tooltip: 切换反向火把替换是否也应适用于恶魔火把
 				}
 
 				ReverseTorchSwapForAetherTorch: {
-					// Label: "[i:ShimmerTorch] Reverse Torch Swap For Aether Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Aether Torches
+					Label: "[i:ShimmerTorch] 以太火把反向替换"
+					Tooltip: 切换反向火把替换是否也应适用于以太火把
 				}
 
 				ReverseTorchSwapForBoneTorch: {
-					// Label: "[i:BoneTorch] Reverse Torch Swap For Bone Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Bone Torches
+					Label: "[i:BoneTorch] 骨头火把反向替换"
+					Tooltip: 切换反向火把替换是否也应适用于骨头火把
 				}
 
 				ConvertTorchesUponHardmode: {
-					// Label: "[i:Torch]->[i:CorruptTorch] Convert Torches Upon Hardmode"
-					// Tooltip: Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
+					Label: "[i:Torch]->[i:CorruptTorch] 困难模式火把转化"
+					Tooltip: 切换当第一次进入困难模式时，是否转化靠近邪恶方块的火把为对应的邪恶火把
 				}
 
 				PreventTorchGodSpawn: {
-					// Label: "[i:TorchGodsFavor] Prevent Torch God Spawn"
-					// Tooltip: Toggle if Torch God should never spawn (its regular condition is 'in caverns & more than 100 torches nearby')
+					Label: "[i:TorchGodsFavor] 防止火把神生成"
+					Tooltip: 切换火把神是否不生成（通常状态下“在洞穴层并且附近有100多个火把”时生成）
 				}
 
 				ConvertTorchesWhenClentaminating: {
-					// Label: "[i:GreenSolution] Convert Torches When Clentaminating"
-					/* Tooltip:
+					Label: "[i:GreenSolution] 使用环境改造枪转化火把"
+					Tooltip:
 						'''
-						Toggle if any placed, convertible torch (that has a matching Solution) will get converted when {$ItemName.Clentaminator} is used
-						This will only convert to/from regular torches, not Bone torches
-						''' */
+						切换当使用{$ItemName.Clentaminator} 时，任何已放置的可转化火把（具有对应的替换方案）是否会被转化
+						这只会转化为/自常规火把，而非骨头火把
+						''' 
 				}
 
 				AffectCampfires: {
-					// Label: "[i:Campfire] Affect Campfires"
-					// Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitly refers to campfires
+					Label: "[i:Campfire] 是否影响篝火"
+					Tooltip: 切换篝火是否也应该受到这个模组的影响。所有提到火把的地方也都同时暗指篝火
 				}
 			}
 
-			// Common.AcceptClientChanges: Only the host of this world can change the config! Do so in singleplayer.
+			Common.AcceptClientChanges: 只有这个世界的主机才能更改配置！请在单人游戏中这么做。
 		}
 
 		RecipeGroups: {
-			// AnyEvilTorchRecipeGroup: "{0} Evil Torch"
-			// AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
+			AnyEvilTorchRecipeGroup: "{0} 邪恶火把"
+			AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
 		}
 	}
 }
+//translated by Limeade_sn
