@@ -33,6 +33,7 @@ namespace TorchGodTweaks
 			recipe.AddRecipeGroup(TGTSystem.PreHMEvilTorchRecipeGroup, otherAmount);
 
 			recipe.AddTile(TileID.DemonAltar);
+			recipe.DisableDecraft();
 			recipe.Register();
 		}
 	}

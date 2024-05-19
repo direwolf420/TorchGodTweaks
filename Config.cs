@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
@@ -62,12 +63,12 @@ namespace TorchGodTweaks
 			return false;
 		}
 
-		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message)
+		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message)
 		{
 			if (Main.netMode == NetmodeID.SinglePlayer) return true;
 			else if (!IsPlayerLocalServerOwner(whoAmI))
 			{
-				message = TGTSystem.AcceptClientChangesText.ToString();
+				message = NetworkText.FromKey("tModLoader.ModConfigRejectChangesNotHost");
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);

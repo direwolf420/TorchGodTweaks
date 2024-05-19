@@ -45,7 +45,7 @@ Mods: {
 						'''
 						Attiva/disattiva se piazzate, converte torcie (che hanno soluzioni apposite) che saranno convertite quando {$ItemName.Clentaminator} viene usato
 						Questa funzione converte solo le torce normali, non le torce di ossa.
-						''' 
+						'''
 				}
 
 				AffectCampfires: {
@@ -53,8 +53,6 @@ Mods: {
 					Tooltip: Attiva/disattiva se i fuochi di bivacco dovrebbero essere influiti dalla mod. Tutto ciò che influisce le torce, influenzerà i fuochi di bivacco.
 				}
 			}
-
-			Common.AcceptClientChanges: Solo il proprietario del mondo può cambiare la configurazione! Fallo in giocatore singolo.
 		}
 
 		RecipeGroups: {

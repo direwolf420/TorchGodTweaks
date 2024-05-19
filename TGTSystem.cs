@@ -38,8 +38,6 @@ namespace TorchGodTweaks
 		public static int PreHMEvilTorchRecipeGroup { get; private set; }
 		public static int GoldRecipeGroup { get; private set; }
 
-		public static LocalizedText AcceptClientChangesText { get; private set; }
-
 		public static LocalizedText AnyEvilTorchRecipeGroupText { get; private set; }
 		public static LocalizedText AnyGoldBarRecipeGroupText { get; private set; }
 
@@ -166,9 +164,6 @@ namespace TorchGodTweaks
 					ModdedBiomeCampfireItems.Add(campfire);
 				}
 			}
-
-			string category = $"Configs.Common.";
-			AcceptClientChangesText ??= Language.GetOrRegister(Mod.GetLocalizationKey($"{category}AcceptClientChanges"));
 
 			AnyEvilTorchRecipeGroupText ??= Language.GetOrRegister(Mod.GetLocalizationKey($"RecipeGroups.AnyEvilTorchRecipeGroup"));
 			AnyGoldBarRecipeGroupText ??= Language.GetOrRegister(Mod.GetLocalizationKey($"RecipeGroups.AnyGoldBarRecipeGroup"));

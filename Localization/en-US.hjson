@@ -53,8 +53,6 @@ Mods: {
 					Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitly refers to campfires
 				}
 			}
-
-			Common.AcceptClientChanges: Only the host of this world can change the config! Do so in singleplayer.
 		}
 
 		RecipeGroups: {
