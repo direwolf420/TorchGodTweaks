@@ -1,63 +1,58 @@
 Mods: {
-	TorchGodTweaks: {
-		Configs: {
-			Config: {
-				// DisplayName: Config
+  TorchGodTweaks: {
+    Configs: {
+      Config: {
+        TorchGodsFavorRecipe: {
+          Label: "[i:TorchGodsFavor] Torch Gottes Gunst Rezept"
+          Tooltip: Toggle, ob die Torch Gottes Gunst hergestellt werden kann (Rezept in der Mod-Beschreibung)
+        }
 
-				TorchGodsFavorRecipe: {
-					// Label: "[i:TorchGodsFavor] Torch God's Favor Recipe"
-					// Tooltip: Toggle if Torch God's Favor will be craftable (recipe in the mod description)
-				}
+        ReverseTorchSwap: {
+          Label: "[i:Torch] Umgekehrter Fackelwechsel"
+          Tooltip: Toggle, ob Biomenfackeln in normale Fackeln umgewandelt werden, wenn sie aufgehoben werden (nur wenn 'Biomenfackelwechsel' aktiviert ist)
+        }
 
-				ReverseTorchSwap: {
-					// Label: "[i:Torch] Reverse Torch Swap"
-					// Tooltip: Toggle if biome torches should turn into regular torches when picked up (only if 'Biome torch swap' is enabled)
-				}
-
-				ReverseTorchSwapForDemonTorch: {
-					// Label: "[i:DemonTorch] Reverse Torch Swap For Demon Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Demon Torches
-				}
-
-				ReverseTorchSwapForAetherTorch: {
-					// Label: "[i:ShimmerTorch] Reverse Torch Swap For Aether Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Aether Torches
-				}
-
-				ReverseTorchSwapForBoneTorch: {
-					// Label: "[i:BoneTorch] Reverse Torch Swap For Bone Torch"
-					// Tooltip: Toggle if Reverse Torch Swap should also apply to Bone Torches
-				}
-
-				ConvertTorchesUponHardmode: {
-					// Label: "[i:Torch]->[i:CorruptTorch] Convert Torches Upon Hardmode"
-					// Tooltip: Toggle if any torch that is near evil blocks will get converted to the corresponding evil torch when hardmode is first entered
-				}
-
-				PreventTorchGodSpawn: {
-					// Label: "[i:TorchGodsFavor] Prevent Torch God Spawn"
-					// Tooltip: Toggle if Torch God should never spawn (its regular condition is 'in caverns & more than 100 torches nearby')
-				}
-
-				ConvertTorchesWhenClentaminating: {
-					// Label: "[i:GreenSolution] Convert Torches When Clentaminating"
-					/* Tooltip:
-						'''
-						Toggle if any placed, convertible torch (that has a matching Solution) will get converted when {$ItemName.Clentaminator} is used
-						This will only convert to/from regular torches, not Bone torches
-						''' */
-				}
-
-				AffectCampfires: {
-					// Label: "[i:Campfire] Affect Campfires"
-					// Tooltip: Toggle if campfires should also be affected by this mod. Everything that refers to torches implicitly refers to campfires
-				}
-			}
-		}
-
-		RecipeGroups: {
-			// AnyEvilTorchRecipeGroup: "{0} Evil Torch"
-			// AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
-		}
+        ReverseTorchSwapForDemonTorch: {
+          Label: "[i:DemonTorch] Umgekehrter Fackelwechsel für Dämonenfackeln"
+          Tooltip: Toggle, ob der umgekehrte Fackelwechsel auch für Dämonenfackeln gilt
 	}
+
+        ReverseTorchSwapForAetherTorch: {
+          Label: "[i:ShimmerTorch] Umgekehrter Fackelwechsel für Ätherfackeln"
+          Tooltip: Toggle, ob der umgekehrte Fackelwechsel auch für Ätherfackeln gilt
+        }
+
+        ReverseTorchSwapForBoneTorch: {
+          Label: "[i:BoneTorch] Umgekehrter Fackelwechsel für Knochenfackeln"
+          Tooltip: Toggle, ob der umgekehrte Fackelwechsel auch für Knochenfackeln gilt
+        }
+
+        ConvertTorchesUponHardmode: {
+          Label: "[i:Torch]->[i:CorruptTorch] Fackeln bei Hardmode umwandeln"
+          Tooltip: Toggle, ob jede Fackel, die in der Nähe von bösen Blöcken ist, in die entsprechende böse Fackel umgewandelt wird, wenn der Hardmode zum ersten Mal betreten wird
+        }
+
+        PreventTorchGodSpawn: {
+          Label: "[i:TorchGodsFavor] Verhindere das Erscheinen des Fackelgottes"
+          Tooltip: Toggle, ob der Fackelgott niemals erscheinen soll (seine reguläre Bedingung ist 'in den Höhlen & mehr als 100 Fackeln in der Nähe')
+        }
+
+        ConvertTorchesWhenClentaminating: {
+          Label: "[i:GreenSolution] Fackeln beim Klentaminieren umwandeln"
+          Tooltip: Toggle, ob jede platzierte, umwandelbare Fackel (die eine passende Lösung hat) beim Benutzen des {$ItemName.Clentaminator} umgewandelt wird
+          This will only convert to/from regular torches, not Bone torches
+        }
+
+        AffectCampfires: {
+          Label: "[i:Campfire] Beeinflusse Lagerfeuer"
+          Tooltip: Toggle, ob Lagerfeuer auch von dieser Mod betroffen sein sollen. Alles, was sich auf Fackeln bezieht, betrifft auch Lagerfeuer
+        }
+      }
+    }
+
+    RecipeGroups: {
+      AnyEvilTorchRecipeGroup: "{0} Böse Fackel"
+      AnyGoldBarRecipeGroup: "{0} {$ItemName.GoldBar}"
+    }
+  }
 }
