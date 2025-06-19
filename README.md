@@ -42,3 +42,4 @@ List of localization contributors:
 * Russian: **GodHybrid**
 * Italian: **Sea Noodle**
 * Simplified Chinese: **Fox Radish, limeade_sn, Cyrilly**
+* German: **Lighty**

@@ -1,5 +1,5 @@
 en-US, 21/21, 100%, missing 0
-de-DE, 0/21, 0%, missing 21
+de-DE, 21/21, 100%, missing 0
 it-IT, 21/21, 100%, missing 0
 fr-FR, 0/21, 0%, missing 21
 es-ES, 0/21, 0%, missing 21
