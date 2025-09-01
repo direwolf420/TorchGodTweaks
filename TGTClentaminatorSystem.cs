@@ -49,7 +49,7 @@ namespace TorchGodTweaks
 		{
 			//Purification powder does not use this, so need to manually convert in its AI
 			//Works for clentaminator and thrown waters
-			On_WorldGen.Convert += WorldGen_Convert;
+			On_WorldGen.Convert_int_int_int_int += WorldGen_Convert;
 		}
 
 		public override void Unload()
@@ -95,7 +95,7 @@ namespace TorchGodTweaks
 			}
 		}
 
-		private void WorldGen_Convert(On_WorldGen.orig_Convert orig, int i, int j, int conversionType, int size)
+		private static void WorldGen_Convert(On_WorldGen.orig_Convert_int_int_int_int orig, int i, int j, int conversionType, int size)
 		{
 			orig(i, j, conversionType, size);
 
