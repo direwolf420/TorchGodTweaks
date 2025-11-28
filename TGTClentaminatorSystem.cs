@@ -49,7 +49,44 @@ namespace TorchGodTweaks
 		{
 			//Purification powder does not use this, so need to manually convert in its AI
 			//Works for clentaminator and thrown waters
-			On_WorldGen.Convert_int_int_int_int += WorldGen_Convert;
+			On_WorldGen.Convert_int_int_int_int_bool_bool += On_WorldGenOnConvert_int_int_int_int_bool_bool;
+		}
+
+		private static void On_WorldGenOnConvert_int_int_int_int_bool_bool(On_WorldGen.orig_Convert_int_int_int_int_bool_bool orig, int i, int j, int conversionType, int size, bool tiles, bool walls)
+		{
+			orig(i, j, conversionType, size, tiles, walls);
+
+			if (!Config.Instance.ConvertTorchesWhenClentaminating)
+			{
+				return;
+			}
+
+			for (int y = j - size; y <= j + size; y++)
+			{
+				for (int x = i - size; x <= i + size; x++)
+				{
+					if (!WorldGen.InWorld(x, y, 1) || Math.Abs(x - i) + Math.Abs(y - j) >= 6)
+					{
+						continue;
+					}
+
+					Tile tile = Main.tile[x, y];
+					if (!tile.HasTile)
+					{
+						continue;
+					}
+
+					if (tile.TileType == TileID.Torches)
+					{
+						ConvertBiomeTorches(conversionType, y, x, tile);
+					}
+
+					if (Config.Instance.AffectCampfires && tile.TileType == TileID.Campfire)
+					{
+						ConvertBiomeCampfires(conversionType, y, x, tile);
+					}
+				}
+			}
 		}
 
 		public override void Unload()
@@ -92,43 +129,6 @@ namespace TorchGodTweaks
 			if (Main.netMode == NetmodeID.MultiplayerClient)
 			{
 				NetMessage.SendTileSquare(-1, left + 1, top, 3);
-			}
-		}
-
-		private static void WorldGen_Convert(On_WorldGen.orig_Convert_int_int_int_int orig, int i, int j, int conversionType, int size)
-		{
-			orig(i, j, conversionType, size);
-
-			if (!Config.Instance.ConvertTorchesWhenClentaminating)
-			{
-				return;
-			}
-
-			for (int y = j - size; y <= j + size; y++)
-			{
-				for (int x = i - size; x <= i + size; x++)
-				{
-					if (!WorldGen.InWorld(x, y, 1) || Math.Abs(x - i) + Math.Abs(y - j) >= 6)
-					{
-						continue;
-					}
-
-					Tile tile = Main.tile[x, y];
-					if (!tile.HasTile)
-					{
-						continue;
-					}
-
-					if (tile.TileType == TileID.Torches)
-					{
-						ConvertBiomeTorches(conversionType, y, x, tile);
-					}
-
-					if (Config.Instance.AffectCampfires && tile.TileType == TileID.Campfire)
-					{
-						ConvertBiomeCampfires(conversionType, y, x, tile);
-					}
-				}
 			}
 		}
 
