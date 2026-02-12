@@ -2,7 +2,7 @@
 
 ![Icon](https://raw.githubusercontent.com/direwolf420/TorchGodTweaks/master/icon.png)
 
-Steam Workshop link: https://steamcommunity.com/sharedfiles/filedetails/?id=2665127853
+Steam Workshop link: https://steamcommunity.com/sharedfiles/filedetails/?id=2562925043
 
 Torch God Tweaks provides a way to skip the event entirely, and some QoL features regarding torches, Torch God and Torch God's Favor.
 
